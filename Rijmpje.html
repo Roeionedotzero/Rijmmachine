@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rijmmachine voor Fruit en Groenten</title> Created by R031
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0be9b2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007BFF;
+        }
+
+        p {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: rgb(244, 12, 12);
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f0f0f0;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        #noRhymesMessage {
+            color: red;
+            display: none;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rijmmachine voor Fruit en Groenten</h1>
+    <p>Voer een woord in en krijg rijmwoorden op basis van de laatste 2/3 letters:</p>
+    <input type="text" id="inputWord" placeholder="Voer een woord in">
+    <button onclick="findRhymes()">Zoek rijmwoorden</button>
+    <p>Rijmwoorden:</p>
+    <ul id="rhymesList"></ul>
+    <p id="noRhymesMessage">Leuk armbandje</p>
+
+    <script>
+        function findRhymes() {
+            const inputWord = document.getElementById("inputWord").value.toLowerCase();
+            const rhymesList = document.getElementById("rhymesList");
+            const noRhymesMessage = document.getElementById("noRhymesMessage");
+            rhymesList.innerHTML = ""; // Wis de vorige resultaten
+            noRhymesMessage.style.display = "none"; // Verberg het bericht
+
+            const foodWords = [
+                "appel", "banaan", "peer", "citroen", "druif",
+                "kiwi", "perzik", "mango", "ananas", "kers",
+                "sinaasappel", "watermeloen", "meloen", "framboos", "aardbei",
+                "abrikoos", "papaja", "avocado", "granaatappel", "vijg",
+                "mandarijn", "kruisbes", "limoen", "passievrucht", "guave",
+                "pruim", "grapefruit", "nectarine", "kokosnoot", "bosbes",
+                "pompoen", "paprika", "tomaten", "aubergine", "courgette",
+                "komkommer", "wortel", "aardappel", "ui", "knoflook",
+                "kool", "spinazie", "sla", "radijs", "asperge",
+                "selderij", "artisjok", "prei", "rodekool", "spruitjes",
+                "rode biet", "bleekselderij", "champignons", "mais", "boerenkool",
+                "bessen", "vlierbessen", "bramen", "aalbessen", "kruisbessen",
+                "peterselie", "koriander", "rozemarijn", "tijm", "basilicum"
+                // Voeg hier meer fruit- en groentesoorten toe indien gewenst
+            ];
+
+            const foundRhymes = [];
+            for (const word of foodWords) {
+                if (word.slice(-2) === inputWord.slice(-2)) {
+                    foundRhymes.push(word);
+                }
+            }
+
+            if (foundRhymes.length > 0) {
+                for (const word of foundRhymes) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = word;
+                    rhymesList.appendChild(listItem);
+                }
+            } else {
+                noRhymesMessage.style.display = "block"; // Toon het bericht
+            }
+        }
+    </script>
+</body>
+</html>
